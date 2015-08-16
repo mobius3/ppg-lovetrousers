@@ -101,6 +101,7 @@ public class PPGController : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Z)) {
 			foreach(PlayerLaser laser in lasers) 
 				laser.gameObject.SetActive(true);
+            turnFactor = turnFactor == 10 ? 3 : 2;
 		} else {
 			foreach(PlayerLaser laser in lasers)
 				laser.gameObject.SetActive(false);

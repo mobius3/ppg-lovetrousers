@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour {
 	IEnumerator SpawnEnemies() {
 		while(transform.childCount < maxEnemies) {
 			spawning = true;
-			yield return new WaitForSeconds(1.0f);
+			yield return new WaitForSeconds(.3f);
 			GameObject enemyObj = GameObject.Instantiate(cerebroLoucoPrefab);
 			enemyObj.GetComponent<Enemy>().follow = follow;
 			//enemyObj.transform.position = follow.position + follow.up * 3;
