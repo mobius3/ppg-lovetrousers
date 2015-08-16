@@ -188,12 +188,11 @@ public class PPGController : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {
-        health -= damage/10.0f;
-        healthValueText.text = health.ToString() + '%';
-
 		girlsAnimator.SetTrigger("Damaged");
-
-        if (health <= 100.0f)
+    	health -= damage/10.0f;
+        healthValueText.text = health.ToString() + '%';
+        if (health <= 0.0f)
             Application.LoadLevel("GameOverScene");
+
     }
 }
