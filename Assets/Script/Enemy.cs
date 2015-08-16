@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour {
 	void Start () {
         target = Random.insideUnitSphere * Random.Range(3, 6);
         body = transform.GetComponent<Rigidbody2D>();
-        transform.position = follow.position + follow.up * -10;
+        transform.position = follow.position + follow.up * -25;
         Position();
 	}
 
