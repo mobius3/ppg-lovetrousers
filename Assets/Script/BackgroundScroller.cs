@@ -16,6 +16,8 @@ public class BackgroundScroller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         GetComponent<Renderer>().material.mainTextureOffset += new Vector2(Speed * Factor * Time.deltaTime, 0);
-		//transform.position = Ypos * Factor * Vector3.up;
+		Vector3 position = transform.position;
+		position.y = Ypos * Factor;
+		transform.position = position;
 	}
 }

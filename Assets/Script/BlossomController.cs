@@ -14,6 +14,6 @@ public class BlossomController : MonoBehaviour {
         transform.position += transform.up * Input.GetAxis("Vertical");
         Debug.Log("x" + Input.GetAxis("Horizontal") + "y" + transform.right + "z" + transform.up);
 		BackgroundScroller.Speed = -Input.GetAxis("Vertical")*transform.right.y;
-		BackgroundScroller.Ypos = transform.position.y;
+		BackgroundScroller.Ypos = -transform.position.y;
 	}
 }
