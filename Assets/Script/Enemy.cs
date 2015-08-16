@@ -41,5 +41,13 @@ public class Enemy : MonoBehaviour {
             scoreValueText.text = destroyCount.ToString();
 		}
 	}
+
+	public void Boss() {
+		hp = 100f;
+		maxSpeed = 5f;
+		time = 0.8f;
+		transform.localScale *= 10f;
+		this.gameObject.name = "Boss brain";
+	}
 	
 }
