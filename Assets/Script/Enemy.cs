@@ -21,6 +21,12 @@ public class Enemy : MonoBehaviour {
         body = transform.GetComponent<Rigidbody2D>();
         transform.position = follow.position + follow.up * -25;
         Position();
+
+		transform.localScale *= Random.Range(1, 3);;
+
+		if (destroyCount == 200) {
+			Boss();
+		}
 	}
 
     void Position()
