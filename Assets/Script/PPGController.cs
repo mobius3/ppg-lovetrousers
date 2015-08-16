@@ -190,7 +190,7 @@ public class PPGController : MonoBehaviour {
     {
         health -= damage/10.0f;
         healthValueText.text = health.ToString() + '%';
-        if (health <= 100.0f)
+        if (health <= 0.0f)
             Application.LoadLevel("GameOverScene");
     }
 }
