@@ -22,7 +22,7 @@ public class PPGController : MonoBehaviour {
             swapMainGirl(value);
         }
     }
-    private Girl _mainGirl = Girl.FLORZINHA;
+    private Girl _mainGirl;
 
     public FlorzinhaController florzinha;
     public LindinhaController lindinha;
@@ -30,7 +30,7 @@ public class PPGController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        mainGirl = Girl.LINDINHA;
 	}
 	
 	// Update is called once per frame
@@ -54,6 +54,7 @@ public class PPGController : MonoBehaviour {
         switch (mainGirl)
         {
             case Girl.FLORZINHA: {
+                Debug.Log("FLORZINHA formation!");
                 florzinha.FlorzinhaFormation();
                 docinho.FlorzinhaFormation();
                 lindinha.FlorzinhaFormation();
@@ -62,12 +63,19 @@ public class PPGController : MonoBehaviour {
 
             case Girl.LINDINHA:
             {
-
+                Debug.Log("LINDINHA formation!");
+                florzinha.LindinhaFormation();
+                docinho.LindinhaFormation();
+                lindinha.LindinhaFormation();
             }
             break;
 
             case Girl.DOCINHO:
             {
+                Debug.Log("DOCINHO formation!");
+                florzinha.DocinhoFormation();
+                docinho.DocinhoFormation();
+                lindinha.DocinhoFormation();
             }
             break;
         }

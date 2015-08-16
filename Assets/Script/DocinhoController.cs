@@ -15,16 +15,16 @@ public class DocinhoController : MonoBehaviour {
 
     public void LindinhaFormation()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.localPosition = new Vector3(-0.25f, 0, 0);
     }
 
     public void DocinhoFormation()
     {
-
+        transform.localPosition = new Vector3(0.0f, 0.25f, 0);
     }
 
     public void FlorzinhaFormation()
     {
-
+        transform.localPosition = new Vector3(0.25f, 0, 0);
     }
 }
