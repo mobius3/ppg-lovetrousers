@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public enum Girl
@@ -32,6 +32,7 @@ public class PPGController : MonoBehaviour {
     private float turnFactor;
 
 	private Animator girlsAnimator;
+	private PlayerLaser[] lasers;
 
 	public static Vector3 speed = Vector3.zero;
     private Vector3 prevSpeed;
@@ -39,7 +40,8 @@ public class PPGController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		girlsAnimator = GetComponent<Animator>();
-		mainGirl = Girl.LINDINHA;
+		mainGirl = Girl.FLORZINHA;
+		lasers = GetComponentsInChildren<PlayerLaser>();
 	}
 	
 	// Update is called once per frame
@@ -60,6 +62,22 @@ public class PPGController : MonoBehaviour {
 			}
 			break;
 		}
+
+		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * turnFactor);
+		Vector3 position = transform.position;
+		position += transform.up * Input.GetAxis("Vertical");
+		if (position.y > -13.75f)
+			transform.position = position;
+		else
+		{
+			if (transform.rotation.eulerAngles.z > 180)
+				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 315.0f));
+			else
+				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 45.0f));
+		}
+		BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
+		//BackgroundScroller.Ypos = -transform.position.y;
+
 		speed = transform.position - pos1;
         
         if (speed.sqrMagnitude > 0 && prevSpeed.sqrMagnitude == 0)
@@ -79,43 +97,26 @@ public class PPGController : MonoBehaviour {
         jet.volume = speed.magnitude;
         turnFactor = (Input.GetKey(KeyCode.UpArrow)) ? 5 : 10;
         Debug.Log(" " + turnFactor + " " + Input.GetAxis("Vertical"));
+
+		if (Input.GetKey(KeyCode.Z)) {
+			foreach(PlayerLaser laser in lasers) 
+				laser.gameObject.SetActive(true);
+		} else {
+			foreach(PlayerLaser laser in lasers)
+				laser.gameObject.SetActive(false);
+		}
 	}
 
     void swapMainGirl(Girl girl)
     {
+		girlsAnimator.SetTrigger("ChangeGirl");
 		girlsAnimator.SetInteger("MainGirl", (int) girl);
 		Debug.Log(girl+" formation!");
-        /*switch (mainGirl)
-        {
-            case Girl.FLORZINHA: {
-                Debug.Log("FLORZINHA formation!");
-                florzinha.FlorzinhaFormation();
-                docinho.FlorzinhaFormation();
-                lindinha.FlorzinhaFormation();
-            }
-            break;
 
-            case Girl.LINDINHA:
-            {
-                Debug.Log("LINDINHA formation!");
-                florzinha.LindinhaFormation();
-                docinho.LindinhaFormation();
-                lindinha.LindinhaFormation();
-            }
-            break;
-
-            case Girl.DOCINHO:
-            {
-                Debug.Log("DOCINHO formation!");
-                florzinha.DocinhoFormation();
-                docinho.DocinhoFormation();
-                lindinha.DocinhoFormation();
-            }
-            break;
-        }*/
     }
 
 	void FlorzinhaMovement() {
+		/*
 		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * turnFactor);
 		Vector3 position = transform.position;
 		position += transform.up * Input.GetAxis("Vertical");
@@ -130,10 +131,11 @@ public class PPGController : MonoBehaviour {
         }
 		BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
 		//BackgroundScroller.Ypos = -transform.position.y;
+		*/
 	}
 
 	void LindinhaMovement() {
-		Vector3 position = transform.position;
+		/*Vector3 position = transform.position;
 		position += Vector3.up * Input.GetAxis("Vertical");
 		position += Vector3.right * Input.GetAxis("Horizontal");
 
@@ -148,9 +150,11 @@ public class PPGController : MonoBehaviour {
         }
 		BackgroundScroller.Speed = Input.GetAxis("Horizontal");
 		//BackgroundScroller.Ypos = -transform.position.y;
+		*/
 	}
 
 	void DocinhoMovement() {
+		/*transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 3);
         transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * turnFactor);
 		Vector3 position = transform.position;
 		position += transform.up * Input.GetAxis("Vertical");
@@ -165,5 +169,6 @@ public class PPGController : MonoBehaviour {
         }
 		BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
 		//BackgroundScroller.Ypos = -transform.position.y;
+		*/
 	}
 }

@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour {
     float maxSpeed = Random.Range(10, 60) * 1.0f;
     float time = Random.Range(30, 80) * 0.01f;
 
+	float hp = Random.Range(1,10);
+
 	// Use this for initialization
 	void Start () {
         target = Random.insideUnitSphere * Random.Range(3, 6);
@@ -27,4 +29,12 @@ public class Enemy : MonoBehaviour {
 	void Update () {
         Position();
 	}
+
+	public void TakeDamage(float amount) {
+		hp -= amount;
+		if (hp <= 0f) {
+			Destroy(this.gameObject);
+		}
+	}
+	
 }
