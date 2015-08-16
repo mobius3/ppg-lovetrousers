@@ -36,7 +36,10 @@ public class PPGController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 3);
-        transform.position += transform.up * Input.GetAxis("Vertical");
+		Vector3 position = transform.position;
+		position += transform.up * Input.GetAxis("Vertical");
+		if (position.y > -3.75f)
+			transform.position = position;
         BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
         BackgroundScroller.Ypos = -transform.position.y;
 

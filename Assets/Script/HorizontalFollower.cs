@@ -12,6 +12,6 @@ public class HorizontalFollower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = new Vector3(follow.position.x, follow.position.y, transform.position.z);
+        	transform.position = new Vector3(follow.position.x, follow.position.y > 0 ? follow.position.y : 0, transform.position.z);
 	}
 }
