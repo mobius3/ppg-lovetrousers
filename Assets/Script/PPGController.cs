@@ -22,13 +22,15 @@ public class PPGController : MonoBehaviour {
             swapMainGirl(value);
         }
     }
-    private Girl _mainGirl;
+    private Girl _mainGirl = Girl.FLORZINHA;
 
     public FlorzinhaController florzinha;
     public LindinhaController lindinha;
     public DocinhoController docinho;
+	public AudioSource[] girlsTheme;
     public AudioSource pxziou;
     public AudioSource jet;
+	public AudioSource laserSound;
     private float turnFactor;
 
 	private Animator girlsAnimator;
@@ -40,13 +42,14 @@ public class PPGController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		girlsAnimator = GetComponent<Animator>();
-		mainGirl = Girl.FLORZINHA;
+		//mainGirl = Girl.FLORZINHA;
 		lasers = GetComponentsInChildren<PlayerLaser>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Vector3 pos1 = transform.position;
+
 		switch (mainGirl)
 		{
 			case Girl.FLORZINHA: {
@@ -65,7 +68,8 @@ public class PPGController : MonoBehaviour {
 
 		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * turnFactor);
 		Vector3 position = transform.position;
-		position += transform.up * Input.GetAxis("Vertical");
+		if (Input.GetAxis("Vertical") > 0f)
+			position += transform.up * Input.GetAxis("Vertical");
 		if (position.y > -13.75f)
 			transform.position = position;
 		else
@@ -75,7 +79,9 @@ public class PPGController : MonoBehaviour {
 			else
 				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 45.0f));
 		}
-		BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
+
+		if (Input.GetAxis("Vertical") > 0f)
+			BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
 		//BackgroundScroller.Ypos = -transform.position.y;
 
 		speed = transform.position - pos1;
@@ -96,15 +102,17 @@ public class PPGController : MonoBehaviour {
 
         jet.volume = speed.magnitude;
         turnFactor = (Input.GetKey(KeyCode.UpArrow)) ? 5 : 10;
-        Debug.Log(" " + turnFactor + " " + Input.GetAxis("Vertical"));
+        //Debug.Log(" " + turnFactor + " " + Input.GetAxis("Vertical"));
 
 		if (Input.GetKey(KeyCode.Z)) {
 			foreach(PlayerLaser laser in lasers) 
 				laser.gameObject.SetActive(true);
             turnFactor = turnFactor == 10 ? 3 : 2;
+			laserSound.volume = 1.0f;
 		} else {
 			foreach(PlayerLaser laser in lasers)
 				laser.gameObject.SetActive(false);
+			laserSound.volume = 0f;
 		}
 	}
 
@@ -112,6 +120,7 @@ public class PPGController : MonoBehaviour {
     {
 		girlsAnimator.SetTrigger("ChangeGirl");
 		girlsAnimator.SetInteger("MainGirl", (int) girl);
+		girlsTheme[(int) girl - 1].Play();
 		Debug.Log(girl+" formation!");
 
     }

@@ -31,6 +31,10 @@ public class EnemyManager : MonoBehaviour {
 			enemyObj.GetComponent<Enemy>().follow = follow;
 			//enemyObj.transform.position = follow.position + follow.up * 3;
 			enemyObj.transform.SetParent(this.transform);
+
+			if (transform.childCount == 50) {
+				enemyObj.GetComponent<Enemy>().Boss();
+			}
 		}
 		spawning = false;
 	}
