@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour {
     public Text scoreValueText;
     float maxSpeed = Random.Range(10, 60) * 1.0f;
     float time = Random.Range(30, 80) * 0.01f;
+    static Enemy boss = null;
 
 	float hp = Random.Range(1,10);
     private static int destroyCount = 0;
@@ -24,8 +25,9 @@ public class Enemy : MonoBehaviour {
 
 		transform.localScale *= Random.Range(1, 3);;
 
-		if (destroyCount == 200) {
+		if (destroyCount >= 200 && boss == null) {
 			Boss();
+            boss = this;
 		}
 	}
 
@@ -45,12 +47,16 @@ public class Enemy : MonoBehaviour {
             destroyCount++;
 			Destroy(this.gameObject);
             scoreValueText.text = destroyCount.ToString();
+            if (boss == this)
+            {
+                Application.LoadLevel("GameWinScene");
+            }
 		}
 	}
 
 	public void Boss() {
 		hp = 100f;
-		maxSpeed = 5f;
+		//maxSpeed = 5f;
 		time = 0.8f;
 		transform.localScale *= 10f;
 		this.gameObject.name = "Boss brain";
