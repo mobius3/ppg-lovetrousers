@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour {
 		time = 0.8f;
 		transform.localScale *= 10f;
 		this.gameObject.name = "Boss brain";
+        Debug.LogError("BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOSSSSSSSSSS");
 	}
 	
 }
