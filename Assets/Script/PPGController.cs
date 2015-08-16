@@ -35,7 +35,7 @@ public class PPGController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		girlsAnimator = GetComponent<Animator>();
-		mainGirl = Girl.LINDINHA;
+		mainGirl = Girl.FLORZINHA;
 	}
 	
 	// Update is called once per frame
@@ -69,36 +69,12 @@ public class PPGController : MonoBehaviour {
 
     void swapMainGirl(Girl girl)
     {
+		girlsAnimator.SetTrigger("ChangeGirl");
 		girlsAnimator.SetInteger("MainGirl", (int) girl);
 		Debug.Log(girl+" formation!");
-        /*switch (mainGirl)
-        {
-            case Girl.FLORZINHA: {
-                Debug.Log("FLORZINHA formation!");
-                florzinha.FlorzinhaFormation();
-                docinho.FlorzinhaFormation();
-                lindinha.FlorzinhaFormation();
-            }
-            break;
-
-            case Girl.LINDINHA:
-            {
-                Debug.Log("LINDINHA formation!");
-                florzinha.LindinhaFormation();
-                docinho.LindinhaFormation();
-                lindinha.LindinhaFormation();
-            }
-            break;
-
-            case Girl.DOCINHO:
-            {
-                Debug.Log("DOCINHO formation!");
-                florzinha.DocinhoFormation();
-                docinho.DocinhoFormation();
-                lindinha.DocinhoFormation();
-            }
-            break;
-        }*/
+		if (girl == Girl.LINDINHA) {
+			this.transform.localRotation = Quaternion.Euler(new Vector3(0f,0f,270f));
+		}
     }
 
 	void FlorzinhaMovement() {
