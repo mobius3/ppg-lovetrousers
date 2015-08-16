@@ -6,27 +6,33 @@ public class EnemyManager : MonoBehaviour {
 
     public Transform follow;
     public GameObject cerebroLoucoPrefab;
-    public List<GameObject> enemies = new List<GameObject>();
     public int maxEnemies;
+
+	private bool spawning = false;
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(SpawnEnemy());
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (!spawning && transform.childCount < maxEnemies)
+		{
+			StartCoroutine(SpawnEnemies());
+		}
 	}
 
-    public IEnumerator SpawnEnemy()
-    {
-        while (enemies.Count < maxEnemies)
-        {
-            yield return new WaitForSeconds(1.0f);
-            GameObject enemyObj = GameObject.Instantiate(cerebroLoucoPrefab);
-            enemyObj.GetComponent<Enemy>().follow = follow;
-            //enemyObj.transform.position = follow.position + follow.up * 3;
-            enemies.Add(enemyObj);
-        }
-    }
+	IEnumerator SpawnEnemies() {
+		while(transform.childCount < maxEnemies) {
+			spawning = true;
+			yield return new WaitForSeconds(1.0f);
+			GameObject enemyObj = GameObject.Instantiate(cerebroLoucoPrefab);
+			enemyObj.GetComponent<Enemy>().follow = follow;
+			//enemyObj.transform.position = follow.position + follow.up * 3;
+			enemyObj.transform.SetParent(this.transform);
+		}
+		spawning = false;
+	}
+
 }

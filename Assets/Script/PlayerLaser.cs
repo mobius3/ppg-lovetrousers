@@ -7,13 +7,11 @@ public class PlayerLaser : MonoBehaviour {
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKey(KeyCode.Z)) {
-			transform.GetChild(0).gameObject.SetActive(true);
-		} else {
-			transform.GetChild(0).gameObject.SetActive(false);
+
+	void OnCollisionEnter2D(Collision2D collision) {
+		//Debug.Log("Esenemy> "+collision.gameObject.name);
+		if (collision.gameObject.tag == "Enemy") {
+			collision.gameObject.GetComponent<Enemy>().TakeDamage(10f);//Destroy(collision.gameObject);
 		}
 	}
 }
