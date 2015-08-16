@@ -28,20 +28,35 @@ public class PPGController : MonoBehaviour {
     public LindinhaController lindinha;
     public DocinhoController docinho;
 
+	private Animator girlsAnimator;
+
+	public static Vector3 speed = Vector3.zero;
+
 	// Use this for initialization
 	void Start () {
-        mainGirl = Girl.LINDINHA;
+		girlsAnimator = GetComponent<Animator>();
+		mainGirl = Girl.LINDINHA;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 3);
-		Vector3 position = transform.position;
-		position += transform.up * Input.GetAxis("Vertical");
-		if (position.y > -3.75f)
-			transform.position = position;
-        BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
-        BackgroundScroller.Ypos = -transform.position.y;
+		Vector3 pos1 = transform.position;
+		switch (mainGirl)
+		{
+			case Girl.FLORZINHA: {
+				FlorzinhaMovement();
+			}
+			break;
+			case Girl.LINDINHA: {
+				LindinhaMovement();
+			}
+			break;
+			case Girl.DOCINHO: {
+				DocinhoMovement();
+			}
+			break;
+		}
+		speed = transform.position - pos1;
 
         if (Input.GetKeyDown("space")) { 
             switch (mainGirl) {
@@ -54,7 +69,9 @@ public class PPGController : MonoBehaviour {
 
     void swapMainGirl(Girl girl)
     {
-        switch (mainGirl)
+		girlsAnimator.SetInteger("MainGirl", (int) girl);
+		Debug.Log(girl+" formation!");
+        /*switch (mainGirl)
         {
             case Girl.FLORZINHA: {
                 Debug.Log("FLORZINHA formation!");
@@ -81,6 +98,36 @@ public class PPGController : MonoBehaviour {
                 lindinha.DocinhoFormation();
             }
             break;
-        }
+        }*/
     }
+
+	void FlorzinhaMovement() {
+		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 3);
+		Vector3 position = transform.position;
+		position += transform.up * Input.GetAxis("Vertical");
+		if (position.y > -3.75f)
+			transform.position = position;
+		BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
+		//BackgroundScroller.Ypos = -transform.position.y;
+	}
+
+	void LindinhaMovement() {
+		Vector3 position = transform.position;
+		position += Vector3.up * Input.GetAxis("Vertical");
+		position += Vector3.right * Input.GetAxis("Horizontal");
+		if (position.y > -3.75f)
+			transform.position = position;
+		BackgroundScroller.Speed = Input.GetAxis("Horizontal");
+		//BackgroundScroller.Ypos = -transform.position.y;
+	}
+
+	void DocinhoMovement() {
+		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 3);
+		Vector3 position = transform.position;
+		position += transform.up * Input.GetAxis("Vertical");
+		if (position.y > -3.75f)
+			transform.position = position;
+		BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
+		//BackgroundScroller.Ypos = -transform.position.y;
+	}
 }
