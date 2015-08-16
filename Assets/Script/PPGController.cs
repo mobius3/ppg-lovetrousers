@@ -54,6 +54,9 @@ public class PPGController : MonoBehaviour {
         switch (mainGirl)
         {
             case Girl.FLORZINHA: {
+                florzinha.FlorzinhaFormation();
+                docinho.FlorzinhaFormation();
+                lindinha.FlorzinhaFormation();
             }
             break;
 

@@ -12,4 +12,19 @@ public class DocinhoController : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void LindinhaFormation()
+    {
+        transform.position = new Vector3(0, 0, 0);
+    }
+
+    public void DocinhoFormation()
+    {
+
+    }
+
+    public void FlorzinhaFormation()
+    {
+
+    }
 }
