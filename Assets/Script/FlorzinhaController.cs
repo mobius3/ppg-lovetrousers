@@ -27,4 +27,13 @@ public class FlorzinhaController : MonoBehaviour {
     {
         transform.localPosition = new Vector3(0, 0.25f, 0);
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            transform.parent.GetComponent<PPGController>().TakeDamage(10f);
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(10f);
+        }
+    }
 }

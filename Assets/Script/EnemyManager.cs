@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class EnemyManager : MonoBehaviour {
     public int maxEnemies;
 
 	private bool spawning = false;
+    public Text scoreValueText;
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +31,7 @@ public class EnemyManager : MonoBehaviour {
 			yield return new WaitForSeconds(.3f);
 			GameObject enemyObj = GameObject.Instantiate(cerebroLoucoPrefab);
 			enemyObj.GetComponent<Enemy>().follow = follow;
+            enemyObj.GetComponent<Enemy>().scoreValueText = scoreValueText;
 			//enemyObj.transform.position = follow.position + follow.up * 3;
 			enemyObj.transform.SetParent(this.transform);
 
