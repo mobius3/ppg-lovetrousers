@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
@@ -7,10 +8,12 @@ public class Enemy : MonoBehaviour {
     Rigidbody2D body;
     Vector3 target;
     Vector3 velocity = Vector3.zero;
+    public Text scoreValueText;
     float maxSpeed = Random.Range(10, 60) * 1.0f;
     float time = Random.Range(30, 80) * 0.01f;
 
 	float hp = Random.Range(1,10);
+    private static int destroyCount = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +36,9 @@ public class Enemy : MonoBehaviour {
 	public void TakeDamage(float amount) {
 		hp -= amount;
 		if (hp <= 0f) {
+            destroyCount++;
 			Destroy(this.gameObject);
+            scoreValueText.text = destroyCount.ToString();
 		}
 	}
 	
