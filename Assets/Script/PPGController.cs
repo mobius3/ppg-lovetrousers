@@ -29,6 +29,7 @@ public class PPGController : MonoBehaviour {
     public DocinhoController docinho;
     public AudioSource pxziou;
     public AudioSource jet;
+    private float turnFactor;
 
 	private Animator girlsAnimator;
 
@@ -60,7 +61,7 @@ public class PPGController : MonoBehaviour {
 			break;
 		}
 		speed = transform.position - pos1;
-        Debug.Log(" " + speed.sqrMagnitude + " " + prevSpeed.sqrMagnitude);
+        
         if (speed.sqrMagnitude > 0 && prevSpeed.sqrMagnitude == 0)
         {
             pxziou.Play();
@@ -76,7 +77,8 @@ public class PPGController : MonoBehaviour {
         }   
 
         jet.volume = speed.magnitude;
-        
+        turnFactor = (Input.GetKey(KeyCode.UpArrow)) ? 5 : 10;
+        Debug.Log(" " + turnFactor + " " + Input.GetAxis("Vertical"));
 	}
 
     void swapMainGirl(Girl girl)
@@ -114,7 +116,7 @@ public class PPGController : MonoBehaviour {
     }
 
 	void FlorzinhaMovement() {
-		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 5);
+		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * turnFactor);
 		Vector3 position = transform.position;
 		position += transform.up * Input.GetAxis("Vertical");
 		if (position.y > -13.75f)
@@ -149,7 +151,7 @@ public class PPGController : MonoBehaviour {
 	}
 
 	void DocinhoMovement() {
-		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 5);
+        transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * turnFactor);
 		Vector3 position = transform.position;
 		position += transform.up * Input.GetAxis("Vertical");
 		if (position.y > -13.75f)
