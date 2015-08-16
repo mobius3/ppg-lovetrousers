@@ -3,14 +3,14 @@ using System.Collections;
 
 public class BackgroundScroller : MonoBehaviour {
 
-    static public float Speed = 1.0f;
+    static public float Speed = 0f;
 	static public float Ypos = 0f;
     public float Factor;
     private float pos;
 
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
