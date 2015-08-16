@@ -14,4 +14,19 @@ public class HorizontalFollower : MonoBehaviour {
 	void Update () {
         transform.position = new Vector3(follow.position.x, follow.position.y, transform.position.z);
 	}
+
+    public void LindinhaFormation()
+    {
+        transform.position = new Vector3(0, 0, 0);
+    }
+
+    public void DocinhoFormation()
+    {
+
+    }
+
+    public void FlorzinhaFormation()
+    {
+
+    }
 }

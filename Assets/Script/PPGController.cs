@@ -24,9 +24,9 @@ public class PPGController : MonoBehaviour {
     }
     private Girl _mainGirl = Girl.FLORZINHA;
 
-    public FlorzinhaController florzinhaObject;
-    public LindinhaController lindinhaObject;
-    public DocinhoController docinhoObject;
+    public FlorzinhaController florzinha;
+    public LindinhaController lindinha;
+    public DocinhoController docinho;
 
 	// Use this for initialization
 	void Start () {
@@ -54,7 +54,6 @@ public class PPGController : MonoBehaviour {
         switch (mainGirl)
         {
             case Girl.FLORZINHA: {
-
             }
             break;
 
