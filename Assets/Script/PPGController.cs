@@ -27,10 +27,13 @@ public class PPGController : MonoBehaviour {
     public FlorzinhaController florzinha;
     public LindinhaController lindinha;
     public DocinhoController docinho;
+    public AudioSource pxziou;
+    public AudioSource jet;
 
 	private Animator girlsAnimator;
 
 	public static Vector3 speed = Vector3.zero;
+    private Vector3 prevSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -57,6 +60,12 @@ public class PPGController : MonoBehaviour {
 			break;
 		}
 		speed = transform.position - pos1;
+        Debug.Log(" " + speed.sqrMagnitude + " " + prevSpeed.sqrMagnitude);
+        if (speed.sqrMagnitude > 0 && prevSpeed.sqrMagnitude == 0)
+        {
+            pxziou.Play();
+        }
+        prevSpeed = speed;
 
         if (Input.GetKeyDown("space")) { 
             switch (mainGirl) {
@@ -64,7 +73,10 @@ public class PPGController : MonoBehaviour {
                 case Girl.LINDINHA: mainGirl = Girl.DOCINHO; break;
                 case Girl.DOCINHO: mainGirl = Girl.FLORZINHA; break;
             }
-        }
+        }   
+
+        jet.volume = speed.magnitude;
+        
 	}
 
     void swapMainGirl(Girl girl)
@@ -122,6 +134,7 @@ public class PPGController : MonoBehaviour {
 		Vector3 position = transform.position;
 		position += Vector3.up * Input.GetAxis("Vertical");
 		position += Vector3.right * Input.GetAxis("Horizontal");
+
 		if (position.y > -13.75f)
 			transform.position = position;
         else
