@@ -18,6 +18,7 @@ public class BackgroundScroller : MonoBehaviour {
         GetComponent<Renderer>().material.mainTextureOffset += new Vector2(Speed * Factor * Time.deltaTime, 0);
 		Vector3 position = transform.position;
 		position.y = Ypos * Factor;
-		transform.position = position;
+		if (position.y < 0)
+			transform.position = position;
 	}
 }
