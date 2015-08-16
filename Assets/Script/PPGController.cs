@@ -102,7 +102,7 @@ public class PPGController : MonoBehaviour {
     }
 
 	void FlorzinhaMovement() {
-		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 3);
+		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 5);
 		Vector3 position = transform.position;
 		position += transform.up * Input.GetAxis("Vertical");
 		if (position.y > -13.75f)
@@ -136,7 +136,7 @@ public class PPGController : MonoBehaviour {
 	}
 
 	void DocinhoMovement() {
-		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 3);
+		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 5);
 		Vector3 position = transform.position;
 		position += transform.up * Input.GetAxis("Vertical");
 		if (position.y > -13.75f)
