@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public enum Girl
 {
@@ -30,6 +31,8 @@ public class PPGController : MonoBehaviour {
     public AudioSource pxziou;
     public AudioSource jet;
     private float turnFactor;
+    private float health;
+    public Text healthValueText;
 
 	private Animator girlsAnimator;
 	private PlayerLaser[] lasers;
@@ -42,6 +45,7 @@ public class PPGController : MonoBehaviour {
 		girlsAnimator = GetComponent<Animator>();
 		mainGirl = Girl.FLORZINHA;
 		lasers = GetComponentsInChildren<PlayerLaser>();
+        health = 100;
 	}
 	
 	// Update is called once per frame
@@ -172,4 +176,10 @@ public class PPGController : MonoBehaviour {
 		//BackgroundScroller.Ypos = -transform.position.y;
 		*/
 	}
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage/10.0f;
+        healthValueText.text = health.ToString() + '%';
+    }
 }
