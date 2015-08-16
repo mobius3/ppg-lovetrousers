@@ -105,8 +105,15 @@ public class PPGController : MonoBehaviour {
 		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 3);
 		Vector3 position = transform.position;
 		position += transform.up * Input.GetAxis("Vertical");
-		if (position.y > -3.75f)
+		if (position.y > -13.75f)
 			transform.position = position;
+        else
+        {
+            if (transform.rotation.eulerAngles.z > 180)
+                transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 315.0f));
+            else
+                transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 45.0f));
+        }
 		BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
 		//BackgroundScroller.Ypos = -transform.position.y;
 	}
@@ -115,8 +122,15 @@ public class PPGController : MonoBehaviour {
 		Vector3 position = transform.position;
 		position += Vector3.up * Input.GetAxis("Vertical");
 		position += Vector3.right * Input.GetAxis("Horizontal");
-		if (position.y > -3.75f)
+		if (position.y > -13.75f)
 			transform.position = position;
+        else
+        {
+            if (transform.rotation.eulerAngles.z > 180)
+                transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 315.0f));
+            else
+                transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 45.0f));
+        }
 		BackgroundScroller.Speed = Input.GetAxis("Horizontal");
 		//BackgroundScroller.Ypos = -transform.position.y;
 	}
@@ -125,8 +139,15 @@ public class PPGController : MonoBehaviour {
 		transform.Rotate(Vector3.forward, -Input.GetAxis("Horizontal") * 3);
 		Vector3 position = transform.position;
 		position += transform.up * Input.GetAxis("Vertical");
-		if (position.y > -3.75f)
+		if (position.y > -13.75f)
 			transform.position = position;
+        else
+        {
+            if (transform.rotation.eulerAngles.z > 180)
+                transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 315.0f));
+            else
+                transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 45.0f));
+        }
 		BackgroundScroller.Speed = -Input.GetAxis("Vertical") * transform.right.y;
 		//BackgroundScroller.Ypos = -transform.position.y;
 	}
