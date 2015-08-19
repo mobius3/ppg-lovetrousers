@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour {
     static Enemy boss = null;
 
 	float hp = Random.Range(1,10);
-    private static int destroyCount = 0;
+    public static int destroyCount = 0;
 
 	// Use this for initialization
 	void Start () {

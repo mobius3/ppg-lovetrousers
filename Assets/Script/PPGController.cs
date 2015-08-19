@@ -35,9 +35,20 @@ public class PPGController : MonoBehaviour {
     private float turnFactor;
     private float health;
     public Text healthValueText;
+	public Text laserPowerText;
 
 	private Animator girlsAnimator;
 	private PlayerLaser[] lasers;
+
+	bool chargingLaser {
+		get;
+		set;
+	}
+
+	float laserPower = 100f;
+
+	const float laserDropRate = 20f;
+	const float laserFillRate = 10f;
 
 	public static Vector3 speed = Vector3.zero;
     private Vector3 prevSpeed;
@@ -108,16 +119,36 @@ public class PPGController : MonoBehaviour {
         turnFactor = (Input.GetKey(KeyCode.UpArrow)) ? 5 : 10;
         //Debug.Log(" " + turnFactor + " " + Input.GetAxis("Vertical"));
 
-		if (Input.GetKey(KeyCode.Z)) {
+		if (!chargingLaser && Input.GetKey(KeyCode.Z)) {
 			foreach(PlayerLaser laser in lasers) 
 				laser.gameObject.SetActive(true);
             turnFactor = turnFactor == 10 ? 3 : 2;
-			laserSound.volume = 1.0f;
+			laserSound.volume = laserPower/100f+0.7F;
+			laserPower -= laserDropRate*Time.deltaTime;
+			if (laserPower <= 30f) {
+				laserPowerText.color = Color.red;
+				if (laserPower <= 0f) {
+					chargingLaser = true;
+				}
+			}
 		} else {
 			foreach(PlayerLaser laser in lasers)
 				laser.gameObject.SetActive(false);
+
+			laserPower += laserFillRate*Time.deltaTime;
 			laserSound.volume = 0f;
+			if (laserPower >= 30f) {
+				chargingLaser = false;
+				laserPowerText.color = Color.green;
+				if (laserPower >= 100f) {
+					laserPower = 100f;
+				}
+			} else {
+				chargingLaser = true;
+				laserPowerText.color = Color.red;
+			}
 		}
+		laserPowerText.text = laserPower.ToString("0")+ '%';
 	}
 
     void swapMainGirl(Girl girl)

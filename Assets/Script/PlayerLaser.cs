@@ -16,7 +16,7 @@ public class PlayerLaser : MonoBehaviour {
 	}*/
 
 	void OnTriggerEnter2D(Collider2D coll) {
-		Debug.Log("Tsenemy> "+coll.gameObject.name);
+		//Debug.Log("Tsenemy> "+coll.gameObject.name);
 		if (coll.gameObject.tag == "Enemy") {
 			coll.gameObject.GetComponent<Enemy>().TakeDamage(10f);//Destroy(collision.gameObject);
     	}
